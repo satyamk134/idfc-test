@@ -1,0 +1,203 @@
+/apps/tajhotels/components/content/tic-signup/tic-signup.html
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+     data-sly-call="${clientlib.all @ categories='taj.hotels.tic.signup'}" />
+<div data-sly-test.edit=${wcmmode.edit}>
+    TIC Sign up
+</div>
+<div data-component-id="${currentNode.name}" class="member-signup-component ${properties.formCustomClass}"
+     data-sly-use.confirmation="confirmation.html">
+    <form class="mr-sub-form member-signup-form" data-form-id="member-signup-form">
+        <div class="member-signup-heading">${properties.formTitle}</div>
+        <div class="member-signup-subtitle">${properties.formSubTitle}</div>
+        <div class="row mr-sub-form-row">
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.titleLabel}</div>
+                <div class="selectSubContainer">
+                    <select data-form-id="signup-title" class="sub-form-input-element sub-form-mandatory" placeholder="${properties.titlePlaceholder}">
+                        <option selected="selected" value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Ms.">Ms.</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.firstNameLabel}</div>
+                <input data-form-id="signup-firstname" class="only-alpha-input sub-form-input-element sub-form-mandatory"
+                       type="text"
+                       placeholder="${properties.firstNamePlaceholder}" />
+                <div class="sub-form-input-warning"></div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.lastNameLabel}</div>
+                <input data-form-id="signup-lastname"
+                       class="only-alpha-input sub-form-input-element sub-form-mandatory"
+                       type="text" placeholder="${properties.lastNamePlaceholder}" />
+                <div class="sub-form-input-warning"></div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.genderLabel}</div>
+                <div class="selectSubContainer">
+                    <select data-form-id="signup-gender" class="sub-form-input-element sub-form-mandatory" placeholder="${properties.genderPlaceholder}">
+                        <option selected="selected" value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+                <div class="sub-form-input-warning"></div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label mr-hide">${properties.dobLabel}</div>
+                <div class="jiva-spa-date-section preferred-date-input-wrp signup-DOB-input-wrapper signup-DOB-input-wrapper">
+                    <div class="jiva-spa-date-con event-quote-date-con">
+                        <input data-form-id="signup-dob" class="date-value sub-form-input-element sub-form-mandatory" type="text"
+                               placeholder="${properties.dobPlaceholder}" value="" disabled="disabled" />
+                        <div class="sub-form-input-warning"></div>
+                        <span class="icon-calendar-check-availability preferred-date-calendar-icon"></span>
+                    </div>
+                    <div class="jiva-spa-date signupDOB-datepicker-container"></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.emailLabel}</div>
+                <input data-form-id="signup-email" class="email-input sub-form-input-element"
+                       type="text" placeholder="${properties.emailPlaceholder}" />
+
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.phoneNumLabel}</div>
+                <input data-form-id="signup-mobile" class="only-numeric-input sub-form-input-element sub-form-mandatory"
+                       type="tel" placeholder="${properties.phoneNumPlaceholder}" />
+                <div class="sub-form-input-warning"></div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.passwordLabel}</div>
+                <input data-form-id="signup-pass" class="member-password sub-form-input-element sub-form-mandatory"
+                       type="password" placeholder="${properties.passwordPlaceholder}" />
+                <div class="sub-form-input-warning"></div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.confPasswordLabel}</div>
+                <input data-form-id="signup-re-pass" class="member-confirm-password sub-form-input-element sub-form-mandatory"
+                       type="password" placeholder="${properties.confPasswordPlaceholder}" />
+                <div class="sub-form-input-warning"></div>
+            </div>
+        </div>
+        <div class="row mr-sub-form-row">
+            <sly data-sly-test="${!properties.addressOptional}">
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.address1Label}</div>
+                <input data-form-id="signup-address1" class="sub-form-input-element sub-form-mandatory"
+                       type="text" placeholder="${properties.address1Placeholder}" />
+                <div class="sub-form-input-warning"></div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.address2Label}</div>
+                <input data-form-id="signup-address2" class="sub-form-input-element"
+                       type="text" placeholder="${properties.address2Placeholder}" />
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.countryLabel}</div>
+                <div class="selectSubContainer">
+                    <select data-form-id="signup-country" class="sub-form-input-element sub-form-mandatory">
+                        <option selected="selected" value="">Select</option>
+                    </select>
+                </div>
+                <div class="sub-form-input-warning"></div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.stateLabel}</div>
+                <div class="selectSubContainer">
+                    <select data-form-id="signup-state" class="sub-form-input-element sub-form-mandatory">
+                        <option selected="selected" value="">Select</option>
+                    </select>
+                </div>
+                <div class="sub-form-input-warning"></div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.cityLabel}</div>
+                <div class="selectSubContainer">
+                    <select data-form-id="signup-city" class="sub-form-input-element sub-form-mandatory">
+                        <option selected="selected" value="">Select</option>
+                    </select>
+                </div>
+                <div class="sub-form-input-warning"></div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label">${properties.pincodeLabel}</div>
+                <input data-form-id="signup-pincode" class="only-numeric-input sub-form-input-element sub-form-mandatory"
+                       placeholder="${properties.pincodePlaceholder}" />
+                <div class="sub-form-input-warning"></div>
+            </div>
+
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label mr-hide">From</div>
+                <div class="jiva-spa-date-section preferred-date-input-wrp signup-DOB-input-wrapper signup-DOB-input-wrapper">
+                    <div class="jiva-spa-date-con event-quote-date-con">
+                        <input data-form-id="signup-dob" class="date-value sub-form-input-element sub-form-mandatory" type="text"
+                               placeholder="${properties.fromPlaceholder}" value="" disabled="disabled" />
+                        <div class="sub-form-input-warning"></div>
+                        <span class="icon-calendar-check-availability preferred-date-calendar-icon"></span>
+                    </div>
+                    <div class="jiva-spa-date signupDOB-datepicker-container"></div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 sub-form-input-wrp enroll-col-md-4">
+                <div class="sub-form-input-label mr-hide">To</div>
+                <div class="jiva-spa-date-section preferred-date-input-wrp signup-DOB-input-wrapper signup-DOB-input-wrapper">
+                    <div class="jiva-spa-date-con event-quote-date-con">
+                        <input data-form-id="signup-dob" class="date-value sub-form-input-element sub-form-mandatory" type="text"
+                               placeholder="${properties.fromPlaceholder}" value=""  />
+                        <div class="sub-form-input-warning"></div>
+                        <span class="icon-calendar-check-availability preferred-date-calendar-icon"></span>
+                    </div>
+                    <div class="jiva-spa-date signupDOB-datepicker-container"></div>
+                </div>
+            </div>
+            </sly>
+            <div class="col-12 choice-input-col ${properties.autoEnrolTic ? 'd-none' : ''}">
+                <label class="mr-filterCheckBox-label checkbox-inline">
+                    <input class="mr-filter-checkbox"
+                           data-form-id="signup-enroll-tic"
+                           type="checkbox" name="autoEnrollTajInnerCircle"
+                           data-sly-attribute.checked="${properties.autoEnrolTic}"/>
+                    <span class="mr-inputCustomShape"></span>
+                    <span>${properties.autoEnrollTicLabel @ context='html'}</span>
+                </label>
+            </div>
+            <div class="col-12 choice-input-col" data-sly-test="${properties.tncLabel}">
+                <label class="mr-filterCheckBox-label checkbox-inline">
+                    <input class="mr-filter-checkbox" data-form-id="signup-terms-accept" type="checkbox" name=""/>
+                    <span class="mr-inputCustomShape"></span>
+                    <span>${properties.tncLabel @ context='html'}</span>
+                    <div class="sub-form-input-warning"></div>
+                </label>
+            </div>
+            <div class="col-12 choice-input-col" data-sly-test="${properties.emailContactLabel}">
+                <label class="mr-filterCheckBox-label checkbox-inline">
+                    <input class="mr-filter-checkbox" data-form-id="signup-contact-email" type="checkbox" name=""/>
+                    <span class="mr-inputCustomShape"></span>
+                    <span>${properties.emailContactLabel @ context='html'}</span>
+                    <div class="sub-form-input-warning"></div>
+                </label>
+            </div>
+            <div class="col-12 choice-input-col" data-sly-test="${properties.dataCollectionLabel}">
+                <label class="mr-filterCheckBox-label checkbox-inline">
+                    <input class="mr-filter-checkbox" data-form-id="signup-data-consent" type="checkbox" name=""/>
+                    <span class="mr-inputCustomShape"></span>
+                    <span>${properties.dataCollectionLabel @ context='html'}</span>
+                    <div class="sub-form-input-warning"></div>
+                </label>
+            </div>
+            <div class="sign-up-btn-wrp col-12">
+                <button data-form-id="sign-up-btn" class="cm-btn-secondary signup-submit-btn" type="button">${properties.submitBtnLabel}</button>
+            </div>
+        </div>
+    </form>
+    <sly data-sly-call="${confirmation.popup}"></sly>
+</div>
+<script>
+    registerSignup(
+        "${currentNode.name @ context='scriptString'}",
+        "${properties.flowSuccessUrl @ context='scriptString'}"
+    )
+</script>

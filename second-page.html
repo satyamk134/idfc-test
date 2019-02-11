@@ -1,0 +1,450 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Example Domain</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/second-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="./js/script.js" ></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</head>
+
+<body>
+    <div class="row header">
+        <div class="col-3 col-offset-1 vertical-center">
+            <img class="menuimage" src="./images/burger-menu-icon.png"><span
+                style="margin-left:10px;font-size: 12px;font-weight: bold;position: relative;bottom: 5px;">MENU</span>
+        </div>
+        <div class="col-4 center vertical-center"><img src="./images/idfc-bank-logo.png"></div>
+        <div class="col-2 col-offset-2 vertical-center"> <img src="./images/page-1.png"><span
+                style="margin-left:10px;font-size: 12px;font-weight: bold;position: relative;bottom: 6px;">LOGIN</span>
+        </div>
+    </div>
+
+    <div class="row money-bar">
+        <div class="col-10 col-offset-1">
+            <div class="col-20 each-money-bar remove-right-border remove-top-bottom-border">
+                <p >Requested loan amount</p>
+                <h5>&#x20b9; 8,00,000 <img id="arrow-1" onclick="startAnimation(1)" src="./images/shape-copy-2.png"></h5>
+                <div class="animate-income-and-bonus animate-income-and-bonus-1">
+                    <div class="income">
+                            <p>Income</p>
+                            <input  type="range" min="1" max="100" value="50" class="slider">
+                            <div class="col-12 income-amount-wrapper">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="bonus">
+                            <p>Bonus</p>
+                            <input  type="range" min="1" max="100" value="50">
+                            <div class="col-12 income-amount-wrapper animate-income-and-bonus-1">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <p class="checked-start"><span class="fa fa-star checked"><span class="star-font">You can increase loan amount</span></span></p>
+            </div>
+            <div class="col-20 each-money-bar remove-right-border remove-top-bottom-border">
+                <p>Monthly Income + Bonus</p>
+                <h5>&#x20b9; 8,00,000 <img id="arrow-2" onclick="startAnimation(2)" src="./images/shape-copy-2.png"></h5>
+                <div class="animate-income-and-bonus animate-income-and-bonus-2">
+                    <div class="income">
+                            <p>Income</p>
+                            <input  type="range" min="1" max="100" value="50">
+                            <div class="col-12 income-amount-wrapper">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="bonus">
+                            <p>Bonus</p>
+                            <input  type="range" min="1" max="100" value="50">
+                            <div class="col-12 income-amount-wrapper animate-income-and-bonus-2">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-20 each-money-bar remove-right-border remove-top-bottom-border">
+                <p>Credit Card expense</p>
+                <h5>&#x20b9; 8,00,000 <img id="arrow-3" onclick="startAnimation(3)" src="./images/shape-copy-2.png"></h5>
+                <div class="animate-income-and-bonus animate-income-and-bonus-3">
+                    <div class="income">
+                            <p>Income</p>
+                            <input  type="range" min="1" max="100" value="50">
+                            <div class="col-12 income-amount-wrapper">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="bonus">
+                            <p>Bonus</p>
+                            <input  type="range" min="1" max="100" value="50">
+                            <div class="col-12 income-amount-wrapper animate-income-and-bonus-2">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-20 each-money-bar remove-right-border remove-top-bottom-border">
+                <p>Unsecure Monthly EMI</p>
+                <h5>&#x20b9; 8,00,000 <img id="arrow-4" onclick="startAnimation(4)" src="./images/shape-copy-2.png"></h5>
+                <div class="animate-income-and-bonus animate-income-and-bonus-4">
+                    <div class="income">
+                            <p>Income</p>
+                            <input  type="range" min="1" max="100" value="50">
+                            <div class="col-12 income-amount-wrapper">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="bonus">
+                            <p>Bonus</p>
+                            <input  type="range" min="1" max="100" value="50">
+                            <div class="col-12 income-amount-wrapper animate-income-and-bonus-2">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-20 each-money-bar remove-top-bottom-border">
+                <p>Secure Monthly EMI</p>
+                <h5>&#x20b9; 8,00,000 <img  id="arrow-5" onclick="startAnimation(5)" src="./images/shape-copy-2.png"></h5>
+                <div class="animate-income-and-bonus animate-income-and-bonus-5">
+                    <div class="income">
+                            <p>Income</p>
+                            <input  type="range" min="1" max="100" value="50">
+                            <div class="col-12 income-amount-wrapper">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="bonus">
+                            <p>Bonus</p>
+                            <input  type="range" min="1" max="100" value="50">
+                            <div class="col-12 income-amount-wrapper animate-income-and-bonus-2">
+                                <div class="col-6 left">
+                                    <p>&#x20b9; 50,000</p>
+                                </div>
+                                <div class="col-6 right">
+                                    <p>&#x20b9; 15,50,000</p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row loan-result-info" onclick="closeIncomeAndBonusAnimator()">
+        <div class="col-3">
+            <div class="back-button-box" onclick="navigateToFirstPage()" href="file:///C:/Users/Admin/Documents/assignment/idfc%20test.html">
+                <img src="./images/shape-copy-2.png">
+            </div>
+        </div>
+        <div class="col-6 loan-result-info">
+            <p class="center">You can get the loan amount of</p>
+            <h2 class="center">&#x20b9; 8 Lakhs</h2>
+            <div class="col-12 border-top emi-and-tenure">
+                <div class="col-6 right-content">
+                    <p class="right-align content">At monthly EMI of</p>
+                    <h4 class="right-align sub-content">&#x20b9; 26,000</h4>
+                </div>
+                <div class="col-6 left-content">
+                    <p class="left-align content">For tenure period of</p>
+                    <h4 class="left-align sub-content">30 Months</h4>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="col-8 col-offset-2  border-bottom">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="col-8 col-offset-2 quotes">
+                    <p>Intrests are calculated are 12%p.a</p>
+                    <p>This quote is not actual represnation of your eligibility.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 levels">
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row recommendation">
+        <h3 class="center heading">Here are our recommendations for you</h3>
+        <div class="col-8 col-offset-3 two-equal-boxes">
+            <div class="col-5">
+                <div class="col-95">
+                    <div class="col-12 center imagebox">
+                        <img src="./images/image1.png">
+                    </div>
+                    <p class="heading center">Part Pre-Payment</p>
+                    <div class="col-12">
+                        <p class="content">
+                            prey pay extra loan amount at<br> no extra charge and save on<br> your intrest<br> check out
+                            your savings!
+                        </p>
+                    </div>
+
+                    <div class="col-12 border-top-bottom">
+                        <div class="col-6 sub-content-left1 border-right">
+                            <h5 class="center">How much you can<br> pre pay annually?</h5>
+                            <div class="col-8 col-offset-2 moneyInputWrapper">
+                                <span class="moneyLabel">&#x20b9;</span>
+                                <input class="input-width input-border" type="number" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-6 sub-content-right1">
+                            <h5 class="center">Your savings on <br>new intrest</h5>
+                            <div class="col-8 col-offset-2 moneyInputWrapper">
+                                <span class="moneyLabel">&#x20b9;</span>
+                                <input class="input-width input-border" type="number" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="see-more-button center">SEE MORE</p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-5">
+                <div class="col-95">
+                    <div class="col-12 center imagebox">
+                        <img src="./images/image2.png">
+                    </div>
+                    <p class="heading center">Balance Transfer</p>
+                    <div class="col-12">
+                        <p class="content">Transfer your existing loans at<br> a lower intrest rate.</p>
+                    </div>
+                    <div class="col-12 border-top right-box-content">
+                        <h5 class="subheading">Calculate Your</h5>
+                    </div>
+                    <div class="col-8 col-offset-2">
+                        <button class="btn">SAVINGS</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8 col-offset-2 center confused-recommendation">
+            <p>!Confused get a more refined recommendation.<span class="red-text">Tell us why you need this loan.</span>
+            </p>
+            <img src="./images/shape-copy-2.png">
+        </div>
+
+        <div class="col-6 col-offset-3">
+            <p class="center get-started">To get started with this solution let us call you back</p>
+            <div class="col-8 col-offset-2">
+                <div class="col-2 front">
+                    <p>+91</p>
+                </div>
+                <div class="col-7 middle">
+                    <input type="number" class="get-started-input" placeholder="Leave your number here">
+                </div>
+                <div class="col-3 end">
+                    <button class="btn">CALL ME</button>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class=" col-6 col-offset-4  all-images-wrapper">
+            <div class="col-2  image-wrapper">
+                <img src="./images/group99.png"><br>
+            </div>
+            <div class="col-2 col-offset-2 image-wrapper ">
+                <img src="./images/page11.png">
+            </div>
+            <div class="col-2 col-offset-2 image-wrapper">
+                <img src="./images/group22.png">
+            </div>
+        </div>
+        <div class=" col-6 col-offset-4 all-images-wrapper all-images-wrapper-text">
+            <div class="col-2 ">
+                <p>Download this<br> solution</p>
+            </div>
+            <div class="col-2 col-offset-2 ">
+                <p>Share this<br> solution</p>
+            </div>
+            <div class="col-2 col-offset-2 ">
+                <p>Need to<br>talk</p>
+            </div>
+        </div>
+        <div class="col-12 levelsDown">
+        
+        </div>
+
+    </div>
+
+    <div class="row other-offerings">
+        <div class="heading">
+            <h2 class="center">Check out other offerings</h2>
+        </div>
+        <div class="col-10 col-offset-1 offering-boxes">
+            <div class="col-6 inner-padding">
+                <div class="total-width-height">
+                    <div class="col-5 image">
+                        <img style="text-align: center"src="./images/pagef-1.png">
+                    </div>
+                   
+                    <div class="col-7 content-wrapper">
+                        <h3 class="heading">Simple personal loan</h3>
+                        <p>
+                            overview of content. Etiam
+                        </p>
+                        <p>
+                            portiter mauris sed epsium
+                        </p>
+
+                        <h5 class="">Know More</h5>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-6 inner-padding">
+               <div class="total-width-height">
+                <div class="col-5 image">
+                    <img style="text-align: center"src="./images/pagee-1.png">
+                </div>
+               
+                <div class="col-7 content-wrapper">
+
+                    <h3 class="heading" >Personal Loan Saver</h3>  
+                    <p>
+                        overview of content. Etiam
+                    </p>
+                    <p>
+                        portiter mauris sed epsium
+                    </p>
+
+                    <h5 class="">Know More</h5>
+                </div>
+               </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row footer">
+            <div class="col-10 col-offset-1">
+                <div class="col-20">
+                    <div class="footer-section footerborder">
+                            <div class="footer-bank-detail-top">
+                                &#169; 2015 IDFC<br> 
+                                All Rights Reserved
+                            </div>
+                           
+        
+                            <div class="footer-bank-detail-bottom">
+                                <p>IDFC BANK NSE<br>312.65<br>22 JUL 11:55:04</p>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-20">
+                        <div class="footer-section footerborder">
+                                    <h4>COMPANY</h4>
+                                    <p>About</p>
+                                    <p>Carriers</p>
+                                    <p>Inestor relations</p>
+                                    <p>Group Companies</p>
+                                    <p>CSR Activities</p>
+                                    <p>Notice Board</p>
+                        </div>
+                </div>
+                <div class="col-40">
+                        <div class="footer-section footerborder">
+                                    <div class="col-6 ">
+                                            <h4>EXPLORE</h4>
+                                            <p>Safe Banking</p>
+                                            <p>Initiatives</p>
+                                            <p>Rates & Charges</p>
+                                            <p>Terms & Condition</p>
+                                            <p>Tool & Calculators</p>
+                                            <p>Form Center</p>
+                                    </div>
+                                    <div class="col-6">
+                                            <h4 style="visibility:hidden">Nothing</h4>
+                                            <p>Regulatory Disclosure</p>
+                                            <p>Do Not Call Registry</p>
+                                            <p>FAQs</p>
+                                            <p>Disclaimer</p>
+                                            <p>Privacy</p>
+                                            <p>Sitemap</p>
+                                    </div>
+                        </div>
+                </div>
+                <div class="col-20">
+                        <div class="footer-section footerborder">
+                                <h4>CONNECT</h4>
+                                <p>Contact Us</p>
+                                <p>Customer Care</p>   
+        
+        
+                        </div>
+                </div>
+            </div>
+    </div>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,418 @@
+function registerSignup(componentId, redirectUrl) {
+    $(document).ready(function() {
+        var GEN_ENROL_ERROR = "An error occurred while creating your profile, please try again.";
+        var component = $('[data-component-id="'+componentId+'"]');
+        var form = $(component).find('[data-form-id="member-signup-form"]');
+        // handle the scenario where siebel enrolment passes but syzygy enrolment fails
+        // now we need to register the same user without enrolment
+        // enrolledMembershipId is populated after a successful enrolment call
+        var enrolledMembershipId;
+
+        // prepopulate fields if taj member
+        if (userCacheExists()) {
+            prepopulateMemberDetails();
+        }
+
+        var memberPassword = form.find('[data-form-id="signup-pass"]');
+        var memberConfirmPassword = form.find('[data-form-id="signup-re-pass"]');
+        $(memberPassword).on('keyup', function () {
+            validatePassword();
+            checkPasswordMatch();
+        });
+        $(memberConfirmPassword).on('keyup', checkPasswordMatch);
+
+        component.find('[data-form-id="signup-gender"]').selectBoxIt();
+
+        var countryDropDown = component.find('[data-form-id="signup-country"]');
+        var stateDropDown = component.find('[data-form-id="signup-state"]');
+        var cityDropDown = component.find('[data-form-id="signup-city"]');
+        countryDropDown.selectBoxIt({
+            populate: locations.map(function(location){return location.countryName;})
+        }).change(function() {
+            var selectedCountry = $(this).val();
+            var countryIndex = locations.findIndex(function(location){
+                return location.countryName === selectedCountry;
+            });
+            var statesList = locations[countryIndex].states.map(function(location) {
+                return location.state;
+            });
+            stateDropDown.data("selectBox-selectBoxIt").remove();
+            cityDropDown.data("selectBox-selectBoxIt").remove();
+            stateDropDown.data("selectBox-selectBoxIt").add(statesList);
+
+        });
+
+        stateDropDown.selectBoxIt().change(function() {
+            var selectedCountry = countryDropDown.val();
+            var selectedState = $(this).val();
+            var countryIndex = locations.findIndex(function(location){
+                return location.countryName === selectedCountry;
+            });
+            var states = locations[countryIndex].states;
+            var stateIndex = states.findIndex(function(location) {
+                return location.state === selectedState;
+            });
+            var cityList = states[stateIndex].cities.map(function (location) {
+                return location.cityName;
+            });
+            cityDropDown.data("selectBox-selectBoxIt").remove();
+            cityDropDown.data("selectBox-selectBoxIt").add(cityList);
+        });
+
+        toggleGdprOptions();
+        component.find('[data-form-id="signup-enroll-tic"]').on('click', function(e) {
+            e.stopPropagation();
+            toggleGdprOptions();
+        });
+
+        // datepicker script
+        component.find('.signupDOB-datepicker-container').datepicker({
+                startDate : '-1000y',
+                endDate : '-18y',
+                autoclose : true,
+        }).on('changeDate', function(element) {
+            if ($(this).hasClass('visible')) {
+                var minDate = (new Date(element.date.valueOf()));
+                var selectedDate = moment(minDate).format("DD/MM/YYYY");
+                var dateSection = $(this).closest(".jiva-spa-date-section");
+                dateSection.find('[data-form-id="signup-dob"]').val(selectedDate).removeClass('invalid-input');
+                dateSection.find('.jiva-spa-date-value').text(selectedDate);
+                dateSection.find('.jiva-spa-date').removeClass('visible');
+                dateSection.find('.jiva-spa-date-con').removeClass('jiva-spa-not-valid');
+            }
+        });
+
+        $('.jiva-spa-date-con').click(function(e) {
+            e.stopPropagation();
+            $(this).siblings('.jiva-spa-date').addClass('visible');
+        });
+
+        $('body, .generic-signin-content-holder').click(function(e) {
+            $('.jiva-spa-date').removeClass('visible');
+        });
+
+        component.find('[data-form-id="sign-up-btn"]').on('click', function(e) {
+            e.stopPropagation();
+            if (validateSignupInputFields()) {
+                var userInput = getInputData();
+                var signupDetails = userInput.registerData;
+                var enrolData = userInput.enrolData;
+                var ticEnroll = form.find('[data-form-id="signup-enroll-tic"]').is(":checked");
+                $('body').showLoader();
+                if (userLoggedIn()) {
+                // if user logged in then no need create profile in syzygy
+                    enrolMember(enrolData)
+                    .done(enrolSuccess)
+                    .fail(registerFail)
+                    .always(function() {
+                        $('body').hideLoader();
+                    });
+                } else if (ticEnroll && !enrolledMembershipId) {
+                    enrolMember(enrolData).done(function(resp) {
+                        if (resp.membershipId) {
+                            signupDetails.membershipId = resp.membershipId;
+                            enrolledMembershipId = resp.membershipId;
+                            return registerUser(signupDetails)
+                            .done(registerSuccess)
+                            .fail(registerFail)
+                            .always(function() {
+                                $('body').hideLoader();
+                            });
+                        } else if (resp.error) {
+                            var errorMessage = resp.errorMessage || GEN_ENROL_ERROR;
+                            warningBox({description: errorMessage});
+                        }
+                    })
+                    .fail(function () {
+                        enrolError();
+                        $('body').hideLoader();
+                    });
+                } else {
+                    if (enrolledMembershipId) {
+                        signupDetails.membershipId = enrolledMembershipId;
+                    }
+                    registerUser(signupDetails)
+                    .done(registerSuccess)
+                    .fail(registerFail)
+                    .always(function() {
+                        $('body').hideLoader();
+                    });
+                }
+            }
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+        });
+
+        function getInputData() {
+            var title = form.find('[data-form-id="signup-title"]').val();
+            var firstName = form.find('[data-form-id="signup-firstname"]').val();
+            var lastName = form.find('[data-form-id="signup-lastname"]').val();
+            var mobile = form.find('[data-form-id="signup-mobile"]').val();
+            var email = form.find('[data-form-id="signup-email"]').val();
+            var password = form.find('[data-form-id="signup-pass"]').val();
+            var gender = form.find('[data-form-id="signup-gender"]').val();
+            var dob = form.find('[data-form-id="signup-dob"]').val();
+            var formattedDob = moment(dob, "DD/MM/YYYY").format("MM/DD/YYYY"); // this is required format for backend
+            var receiveMail = form.find('[data-form-id="signup-contact-email"]').is(":checked");
+            var dataConsent = form.find('[data-form-id="signup-data-consent"]').is(":checked");
+            var tnc = form.find('[data-form-id="signup-terms-accept"]').is(":checked");
+            var address1 = form.find('[data-form-id="signup-address1"]').val();
+            var address2 = form.find('[data-form-id="signup-address2"]').val();
+            var country = form.find('[data-form-id="signup-country"]').val();
+            var state = form.find('[data-form-id="signup-state"]').val();
+            var city = form.find('[data-form-id="signup-city"]').val();
+            var pincode = form.find('[data-form-id="signup-pincode"]').val();
+            var registerData = {
+                title : title,
+                firstName : firstName,
+                middleName : "",
+                lastName : lastName,
+                email : email,
+                loginId : email,
+                password : password,
+                countryCode : "91",
+                mobile : mobile,
+                gender : gender
+            };
+
+            var enrolData = {
+                title : title,
+                firstName : firstName,
+                middleName : "",
+                lastName : lastName,
+                email : email,
+                countryCode : "91",
+                mobile : mobile,
+                gender : gender,
+                dateOfBirth: formattedDob,
+                receiveMail: receiveMail,
+                dataConsent: dataConsent,
+                address1: address1,
+                address2: address2,
+                country: country,
+                state: state,
+                city: city,
+                pincode: pincode
+            };
+
+            return {
+                registerData: registerData,
+                enrolData: enrolData
+            };
+        }
+
+        function registerSuccess(res) {
+            if (res.failure) {
+                var errors = res.errorTokenList;
+                // taking 0th error message
+                warningBox({description: errors[0].message});
+            } else if (res.status) {
+                var newAccountDetails = res.newAccount;
+                $(form).trigger("reset");
+                // show success pop up
+                 showSignUpConfirmation(newAccountDetails, true);
+            }
+        }
+
+        function enrolSuccess(res) {
+            if (res.error) {
+                var errorMessage = res.errorMessage || GEN_ENROL_ERROR;
+                warningBox({description: errorMessage});
+            } else if (res.membershipId) {
+                var userDetails = getUserData();
+                userDetails.membershipId = res.membershipId;
+                setUserData(userDetails);
+                showSignUpConfirmation(userDetails, false);
+            }
+        }
+
+        function enrolError(res) {
+            var errorMessage = GEN_ENROL_ERROR;
+            warningBox({description: errorMessage});
+        }
+
+        function registerFail(res) {
+            var errorMessage = GEN_ENROL_ERROR;
+            warningBox({description: errorMessage});
+        }
+
+        function toggleGdprOptions() {
+            if(component.find('[data-form-id="signup-enroll-tic"]').is(':checked')) {
+                form.find('[data-form-id="signup-contact-email"]').parents('.choice-input-col').show();
+                form.find('[data-form-id="signup-data-consent"]').parents('.choice-input-col').show();
+            } else {
+                form.find('[data-form-id="signup-contact-email"]').parents('.choice-input-col').hide();
+                form.find('[data-form-id="signup-data-consent"]').parents('.choice-input-col').hide();
+            }
+        }
+
+        function validateSignupInputFields() {
+            var flag = true;
+            form.find('input.sub-form-mandatory,select.sub-form-mandatory').each(function() {
+                if ($(this).val() == "" || $(this).hasClass('invalid-input')) {
+                    $(this).addClass('invalid-input');
+                    flag = false;
+                    invalidWarningMessage($(this));
+                }
+            });
+            var passwordValid = validatePassword();
+            var tncAccepted = checkTnC();
+            return flag && passwordValid && tncAccepted;
+        }
+
+        // Password should be more than 4 characters
+        function validatePassword() {
+            var PASS_SIZE_ERR = "Password should be more than 4 characters and should contain atleast one alphabet and a number";
+            if (memberPassword.length && (memberPassword.val().length > 5) && (/\d/.test(memberPassword.val())) && (/[a-zA-Z]/.test(memberPassword.val()))) {
+                memberPassword.removeClass('invalid-input');
+                memberPassword.siblings('.sub-form-input-warning').html('').hide();
+                return true;
+
+            } else {
+                memberPassword.addClass('invalid-input');
+                memberPassword.siblings('.sub-form-input-warning').html(PASS_SIZE_ERR).show();
+                return false;
+            }
+        }
+
+        // User needs to accept terms and conditions
+        function checkTnC() {
+            var T_N_C_ERR = "Please read and agree to the Taj InnerCircle (TIC) programme terms and conditions and IHCL’s Privacy Policy.";
+            var tncField = form.find('[data-form-id="signup-terms-accept"]');
+            if (!tncField.is(":checked")) {
+                tncField.addClass('invalid-input');
+                tncField.siblings('.sub-form-input-warning').html(T_N_C_ERR).show();
+                return false;
+            } else {
+                tncField.removeClass('invalid-input');
+                tncField.siblings('.sub-form-input-warning').html('').hide();
+                return true;
+            }
+        }
+
+        function checkPasswordMatch() {
+            var PASS_MATCH_ERR = "Password does not match";
+            if (memberConfirmPassword.val() != "" && (memberConfirmPassword.val() != memberPassword.val())) {
+                memberConfirmPassword.addClass('invalid-input');
+                memberConfirmPassword.siblings('.sub-form-input-warning').html(PASS_MATCH_ERR).show();
+            } else {
+                memberConfirmPassword.removeClass('invalid-input');
+                memberConfirmPassword.siblings('.sub-form-input-warning').html('').hide();
+            }
+        }
+
+        function showSignUpConfirmation(userDetails, activateAccReq) {
+            var memberSignupConfirmationWrapper = $(component).find('.member-signup-confirmation');
+            memberSignupConfirmationWrapper.find(".first-name").text(userDetails.firstName);
+            memberSignupConfirmationWrapper.find(".last-name").text(userDetails.lastName);
+            if (userDetails.email) {
+                memberSignupConfirmationWrapper.find(".tic-email-wrapper .tic-id-value").text(userDetails.email);
+            } else {
+                memberSignupConfirmationWrapper.find(".tic-email-wrapper").hide();
+            }
+            if (userDetails.membershipId) {
+                memberSignupConfirmationWrapper.find(".tic-membid-wrapper .tic-id-value").text(userDetails.membershipId);
+            } else {
+                memberSignupConfirmationWrapper.find(".tic-membid-wrapper").hide();
+            }
+            if (activateAccReq) {
+                activateConfBtns(userDetails.email);
+            } else {
+                memberSignupConfirmationWrapper.find(".tic-online-activation-wrps").remove();
+                memberSignupConfirmationWrapper.find(".otp-generation-screen").remove();
+            }
+
+            $(component).find('.signup-done').on('click', function(e){
+                navigateFlowSuccess();
+            });
+            form.hide();
+            memberSignupConfirmationWrapper.show();
+        }
+
+        function activateConfBtns(email) {
+            $(component).find('.otp-generation-screen').on('click', function(e) {
+                e.stopPropagation();
+                $(component).find('.member-signup-confirmation').hide();
+                $(component).find('.account-online-otp-wrapper').show();
+            });
+
+            $(component).find('[data-form-id="signup-otp-next"]').on('click', function(e) {
+                e.stopPropagation();
+                var otpInput = $(component).find('[data-form-id="online-otp-input"]');
+                handleOtpInput(otpInput, email);
+            });
+
+            $(component).find('.tic-online-resend-otp').on('click', function(e) {
+                e.stopPropagation();
+                handleResendOtp(email);
+            });
+        }
+
+        function handleOtpInput(inputEl, email) {
+            var GEN_OTP_ERR = "An error occurred while validating OTP, please check the OTP and try again";
+            var OTP_SIZE_ERR = "Please enter valid OTP";
+            var otp = $(inputEl).val();
+            if (otp.length > 4) {
+                $(inputEl).removeClass('invalid-input');
+                $(inputEl).siblings('.sub-form-input-warning').html('').hide();
+                $('body').showLoader();
+                validateOtp(otp, email).done(function(res) {
+                    if (res.status === "success") {
+                        navigateFlowSuccess();
+                    } else {
+                        warningBox({description: GEN_OTP_ERR});
+                    }
+                }).fail(function() {
+                    warningBox({description: GEN_OTP_ERR})
+                }).always(function() {
+                    $('body').hideLoader();
+                });
+            } else {
+                $(inputEl).addClass('invalid-input');
+                $(inputEl).siblings('.sub-form-input-warning').html(OTP_SIZE_ERR).show();
+            }
+        }
+
+        function handleResendOtp(email) {
+            $('body').showLoader();
+            sendOtp(email).done(function() {
+                $(component).find('.account-online-otp-wrapper .resend-fail-message').hide();
+                $(component).find('.account-online-otp-wrapper .resend-success-message').show();
+            }).fail(function() {
+                $(component).find('.account-online-otp-wrapper .resend-success-message').hide();
+                $(component).find('.account-online-otp-wrapper .resend-fail-message').show();
+            }).always(function() {
+                $('body').hideLoader();
+            });
+        }
+
+        function navigateFlowSuccess() {
+            window.location.href = redirectUrl;
+        }
+
+        function prepopulateMemberDetails() {
+            var userDetails = getUserData() || {};
+            if (userLoggedIn()) {
+                form.find('[data-form-id="signup-pass"]').parents(".sub-form-input-wrp").remove();
+                form.find('[data-form-id="signup-re-pass"]').parents(".sub-form-input-wrp").remove();
+            }
+            if (userDetails.title) {
+                form.find('[data-form-id="signup-title"]').val(userDetails.title).prop('disabled', true);
+            }
+            if (userDetails.firstName) {
+                form.find('[data-form-id="signup-firstname"]').val(userDetails.firstName).prop('disabled', true);
+            }
+            if (userDetails.lastName) {
+                form.find('[data-form-id="signup-lastname"]').val(userDetails.lastName).prop('disabled', true);
+            }
+            if (userDetails.mobile) {
+                form.find('[data-form-id="signup-mobile"]').val(userDetails.mobile).prop('disabled', true);
+            }
+            if (userDetails.email) {
+                form.find('[data-form-id="signup-email"]').val(userDetails.email).prop('disabled', true);
+            }
+            if (userDetails.gender) {
+                form.find('[data-form-id="signup-gender"]').val(userDetails.gender).prop('disabled', true);
+            }
+        }
+    });
+}

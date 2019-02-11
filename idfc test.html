@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <script src="./js/script.js" ></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+      
+</head>
+
+<div class="row header">
+    <div class="col-3 col-offset-1 vertical-center" >
+        <img class="menuimage" src="./images/burger-menu-icon.png"><span style="margin-left:10px;font-size: 12px;font-weight: bold;position: relative;bottom: 5px;">MENU</span>
+    </div>
+    <div class="col-4 center vertical-center"><img src="./images/idfc-bank-logo.png"></div>
+    <div class="col-2 col-offset-2 vertical-center"> <img src="./images/page-1.png"><span style="margin-left:10px;font-size: 12px;font-weight: bold;position: relative;bottom: 6px;">LOGIN</span></div>
+    
+</div>
+
+
+<div class="row personalLoan">
+    <div class="col-12 search-image">
+        <img src="./images/search.png"> 
+    </div>
+    <div class="col-12 ">
+        <h1 class="center heading" >Personal Loan</h1>
+        <p class="center sub-heading">For all your needs big or small, we help you fulfill them and get much more.</p>
+    </div>
+    <div class="col-8 col-offset-2 ">
+        <div class="col-4 boxes">
+            <div class="boxLogo">
+                <img id="savings-image" src="./images/pl-prelogin-gif-savings.png">
+            </div>
+            <h2 class="sub-heading">Savings</h2>
+            <p class="sub-content">Save More on your Intrest</p>
+            <p class="seeMoreButton">SEE MORE</p>
+            
+        </div>
+        <div class="col-4 boxes" style="border-left:none;">
+            <div class="col-12 toggle-flexibility-box">
+                    <div class="boxLogo">
+                        <img id="flexibility-image" src="./images/pl-prelogin-gif-flexibility.png">
+                    </div>
+                    <h2 class="sub-heading">Flexibility</h2>
+                    <p class="sub-content">Payback On your own terms</p>
+                    <p class="seeMoreButton" onclick="toggleFlexibilityHandler()">SEE MORE</p>
+            </div>
+            
+            <div class="col-12 flexibility-second-box">
+                    <div  class="small-flexibility-logo">
+                        <img class="vertical-center" src= "./images/pl-prelogin-gif-flexibility.png">
+                    </div>
+                    <h2 class="sub-heading">Flexibility</h2>
+                    <div class="col-6 flexibility-second-box-content border-top border-right border-bottom">
+                        <h5 class>3 months <br>Tenure option</h5>
+                        <p >With tenure <br>period as less <br>as 3 months</p>
+                    </div>
+                    <div class="col-6 flexibility-second-box-content border-top border-bottom">
+                            <h5 class>Flexibile <br>EMI & Tenure</h5>
+                            <p >With tenure <br>period as less <br>as 3 months</p>
+                    </div>
+                    <div class="col-12">
+                            <p  onclick="toggleFlexibilityHandler()" class="seeMoreButton vertical-center">SEE MORE</p>
+                    </div>
+            </div>
+
+            
+            
+        </div>
+        <div class="col-4 boxes" style="border-left:none;">
+            <div class="boxLogo">
+                <img  id ="group-2-image" src="./images/group-2.png">
+            </div>
+            <h2 class="sub-heading">Convienece</h2>
+            <p class="sub-content">Manage your Loans with ease</p>
+            <p class="seeMoreButton">SEE MORE</p>
+        </div>
+    </div>
+    <!--the top sea level like image-->
+    <div class="row">
+        <div class="col-12 levels">
+    
+        </div>
+    </div>
+
+</div>
+
+<div class="row userInfo">
+            <h2 >Tell us about you and see how you can benefit</h2>
+            <div class="col-8 col-offset-2 userInfoContent" >
+                    <div class="col-10 col-offset-1">
+                            <p >I need a personal loan of <img class="moneyImageSize" src="./images/fill-1.png"><input type="number" class="inputBorder"></p>
+                            <p>I am working at <input type="text" class="inputBorder"> and</p>
+                            <p>make <img src="./images/fill-1.png"><input type="number" class="inputBorder">per month</p>
+                    </div>
+
+                    <div  class="col-10 col-offset-1 cardOption" >
+                            <label class="checkbox-container">I use Credit Card
+                                    <input type="checkbox" onchange="useCreditCardToggle()">
+                                    <span class="checkbox-checkmark"></span>
+                                  </label>
+                       
+                        <p class="hide-me">  My average Credit Card Expense </p>
+                        <p class="hide-me">is <img src="./images/fill-1.png"><input type="number" class="inputBorder">monthly</p>
+                    </div>
+                    <div class="col-6 col-offset-3 monthly-emi hide-me">
+                        <p>I pay a monthly EMI of</p>
+                            <div class=" col-5 padding-right" >
+                                    <div class="col-2 ">
+                                            <img src="./images/fill-1.png">
+                                    </div>
+                                    <div class="col-10  ">
+                                            <input type="number" class="inputBorder">
+                                    </div>  
+                            </div>
+                            <div class="col-5 col-offset-1 padding-left" >
+                                    <div class="col-2">
+                                            <img src="./images/fill-1.png">
+                                    </div>
+                                    <div class="col-10">
+                                            <input type="number" class="inputBorder">
+                                    </div>               
+                            </div>
+                     
+                    </div>
+
+                    <div class="col-6 col-offset-3 emiInputWrapper">
+                        <div class="imageWrapper col-2">
+                            <img src="./images/group-7.png" alt="add Emi">
+                        </div>
+                        <div class="col-10">
+                            <input type="text" class="emiInput" placeholder="Add your existing EMI if any">
+                        </div>
+                    </div>
+
+                    <!--All Four image of the corner-->
+                    <img src="./images/group-8-copy.png" class="posTL">
+                    <img src="./images/group-8-copy.png" class="posTR">
+                    <img src="./images/group-8-copy.png" class="posBL">
+                    <img src="./images/group-8-copy.png" class="posBR">
+            </div>
+
+            <!--the bottom sea level like image-->
+            <div class="col-12 levelsDown">
+        
+            </div>  
+</div>
+
+<!--The footer-->
+
+<div class="row footer">
+    <div class="col-10 col-offset-1">
+        <div class="col-20">
+            <div class="footer-section footerborder">
+                    <div class="footer-bank-detail-top">
+                        &#169; 2015 IDFC<br> 
+                        All Rights Reserved
+                    </div>
+                   
+                    <div class="footer-bank-detail-bottom">
+                        <p>IDFC BANK NSE<br>312.65<br>22 JUL 11:55:04</p>
+                    </div>
+            </div>
+        </div>
+        <div class="col-20">
+                <div class="footer-section footerborder">
+                            <h4>COMPANY</h4>
+                            <p>About</p>
+                            <p>Carriers</p>
+                            <p>Inestor relations</p>
+                            <p>Group Companies</p>
+                            <p>CSR Activities</p>
+                            <p>Notice Board</p>
+                </div>
+        </div>
+        <div class="col-40">
+                <div class="footer-section footerborder">
+                            <div class="col-6 ">
+                                    <h4>EXPLORE</h4>
+                                    <p>Safe Banking</p>
+                                    <p>Initiatives</p>
+                                    <p>Rates & Charges</p>
+                                    <p>Terms & Condition</p>
+                                    <p>Tool & Calculators</p>
+                                    <p>Form Center</p>
+                            </div>
+                            <div class="col-6">
+                                    <h4 style="visibility:hidden">Nothing</h4>
+                                    <p>Regulatory Disclosure</p>
+                                    <p>Do Not Call Registry</p>
+                                    <p>FAQs</p>
+                                    <p>Disclaimer</p>
+                                    <p>Privacy</p>
+                                    <p>Sitemap</p>
+                            </div>
+                </div>
+        </div>
+        <div class="col-20">
+                <div class="footer-section footerborder">
+                        <h4>CONNECT</h4>
+                        <p>Contact Us</p>
+                        <p>Customer Care</p>   
+
+
+                </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,472 @@
+        body{
+            padding: 0;
+            margin:0;
+            font-family:Gotham-Light;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'Gotham-Medium'; /*a name to be used later*/
+            src: url('./Gotham-Font/GothamMedium.ttf'); /*URL to font*/
+        }
+
+        @font-face {
+            font-family: 'Gotham-Light'; /*a name to be used later*/
+            src: url('./Gotham-Font/GothamLight.ttf'); /*URL to font*/
+        }
+       
+        
+        .col-1 {width: 8.33%;}
+        .col-2 {width: 16.66%;}
+        .col-20 {width:20%}
+        .col-40{width:40%}
+        .col-3 {width: 25%;}
+        .col-4 {width: 33.33%;}
+        .col-5 {width: 41.66%;}
+        .col-6 {width: 50%;}
+        .col-7 {width: 58.33%;}
+        .col-8 {width: 66.66%;}
+        .col-9 {width: 75%;}
+        .col-10 {width: 83.33%;}
+        .col-11 {width: 91.66%;}
+        .col-12 {width: 100%;}
+
+        .col-offset-1{
+            margin-left:8.33%
+        }
+        .col-offset-2{
+            margin-left:16.66%
+        }
+        .col-offset-3{
+            margin-left:25%
+        }
+        .col-offset-4{
+            margin-left:33.33%
+        }
+        .col-offset-5{
+            margin-left:41.66%
+        }
+        .col-offset-6{
+            margin-left:50%
+        }
+        .col-offset-7{
+            margin-left:58.33%
+        }
+        .col-offset-8{
+            margin-left:66.66%
+        }
+        .col-offset-9{
+            margin-left:75%
+        }
+        .col-offset-10{
+            margin-left:83.33%
+        }
+        .col-offset-11{
+            margin-left:91.66%
+        }
+        .col-offset-12{
+            margin-left:100%;
+        }
+
+        [class*="col-"] {
+            float: left;
+        }
+
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .header{
+            width: 100%;
+            height: 60px;
+            background-color: #ffffff;
+            font-family: Gotham-Medium;
+
+        }
+
+        .menuimage {
+            width:25px;
+            height:19px;
+        }
+        .center{
+            text-align:center;
+        }
+
+        .personalLoan{
+            height: 560px;
+            background-color: #f9f7ef;
+            position: relative;
+        }
+
+        .personalLoan .search-image{
+            width:50px;
+            height: 50px;
+            float: right;
+        }
+
+        .personalLoan h1{
+           
+            font-size: 30px;
+            font-family: Gotham-Light;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            color:#c98bdb
+        }
+        .personalLoan .sub-heading{
+            font-size:16px; 
+        }
+
+        .boxes{
+            border:solid 1px #e1e1e1;
+            height: 280px;
+            text-align:center;
+        }
+        
+        .boxLogo{
+            height: 150px;
+            overflow: hidden;
+            position:relative;
+        }
+        .boxLogo img{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+
+        }
+        #savings-image{
+            max-height:101px;
+            max-width:101px;
+        }
+
+        #flexibility-image{
+            max-width:108.1px;
+            max-height:59.9px;
+        }
+
+        #group-2-image{
+            max-width:110px;
+            max-height:110px;
+        }
+
+        .boxes .sub-heading{
+            font-size:22px;
+            color:#4a4a4a;
+            font-family: Gotham-Light;
+            font-weight:bold;
+        }
+        .boxes .sub-content{
+            color:#797979;
+            
+
+        }
+        .boxes .seeMoreButton{
+            color:#fb637e;
+            font-size: 10px;
+            margin-top:25px;
+            font-family:  Gotham-Medium; 
+        }
+        .levels{
+            background-image: url('../images/levels.png');
+            height:35px;
+            background-repeat:repeat-x;
+            position: absolute;
+            bottom: 0;
+        }
+        .userInfo{
+            height: 900px;
+            font-size: 30px;
+            background-color: #fcdf8e;
+            position: relative;
+        }
+        .userInfo h2{
+            font-weight: bold;
+            color:white;
+            position: relative;
+            top:40px;
+            font-size: 20px;
+            margin:0;
+            text-align:center;
+        }
+        .userInfo .userInfoContent{
+           height: 750px;
+            position: relative;
+            top:70px;
+            font-weight: 100;
+            text-align: center;
+        }
+        .userInfo .moneyImageSize{
+            height:22px;
+            width:17px;
+
+        }
+        
+        .posTL{
+            top:0;left: 0;
+            position: absolute;
+        }
+        .posTR{
+            top:0;right: 0;
+            position: absolute;
+            transform: rotate(90deg);
+        }
+        .posBL{
+            bottom:0;left: 0;
+            position: absolute;
+            transform: rotate(270deg);
+        }
+        .posBR{
+            bottom:0;right: 0;
+            position: absolute;
+            transform: rotate(180deg);
+        }
+         input[class*="inputBorder"]{
+            -webkit-appearance: none;
+            appearance:none;
+            margin: 5px;
+            
+            border:none;
+            background-color:#fcdf8e;
+            border-bottom: dotted 2px red;
+        }
+        input[class*="inputBorder"]:focus{
+            outline: none;
+        }
+        .userInfoContent .cardOption{
+            line-height: 2;
+            font-size:19.2px;
+            color:#4a4a4a;
+            border:solid 1px rgba(74, 74, 74, 0.1);
+            border-left: none;
+            border-right:none;
+            padding-top:10px;
+            padding-bottom: 10px;
+        }
+
+        .border-bottom-black{
+            border-bottom:solid 1px rgba(74, 74, 74, 0.1);
+        }
+        
+        .userInfoContent p{
+            font-size: 30px;
+            font-weight: 300;
+        }
+        input[class*="emiInput"]{
+            width:100%;
+            font-size:15px;
+            border:dashed 1px #c6cfd9;
+            height: 47px;
+            padding-left: 10px;
+            background-color: #f9f9f9;
+            
+        }
+        .emiInputWrapper{
+            padding-top: 35px;
+            padding-bottom: 5px;  
+        }
+        .emiInputWrapper .imageWrapper{
+            height: 47px;
+            background-color: #ffffff;
+            border:dashed 1px #c6cfd9;
+            border-right: none;
+           
+        }
+        .emiInputWrapper img{
+            position: relative;
+            top:15%;
+        }
+        .monthly-emi .padding-left{
+            padding-left: 40px;
+        }
+
+        .monthly-emi .padding-right{
+           padding-right: 40px;
+        }
+        .levelsDown{
+            background-image: url('../images/levels.png');
+            transform: rotate(180deg);
+            height:35px;
+            background-repeat:repeat-x;
+            position: absolute;
+            bottom: -35px;
+        }
+        .footer{
+            opacity: 0.2;
+            margin-top:80px;
+            height: 307px;
+            font-family:Gotham-Medium;
+            
+        }
+        .footer p{
+            padding: 0;
+            margin: 0;
+            margin: 4px;
+        }
+
+        .footer .footer-bank-detail-top{
+            margin-top:20px;
+        }
+
+        .footer .footer-bank-detail-bottom{
+            margin-top:75px;
+        }
+        
+        .footerborder{
+            border-top:solid 2px #FF5500;
+        }
+
+        .footer1-background-color{
+            border-top:solid 1px #FF5500;
+        }
+
+        .footer2-background-color{
+            border-top:solid 1px #FFF300;
+        }
+
+        .footer3-background-color{
+            border-top:solid 1px #FFD2DD;
+        }
+        .footer4-background-color{
+            border-top:solid 1px #FFF17F;
+        }
+
+
+        .footerborder ul{
+            list-style-type: none;
+
+        }
+        .vertical-center{
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%); 
+        }
+        input[type="checkbox"]{
+            width: 23.8px; /*Desired width*/
+            height: 24px; /*Desired height*/
+            position: relative;
+            top:5px;
+            background: #ffffff;
+        }
+
+        .footer-section{
+            width:90%;
+        }
+        .hide-me{
+            display: block;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        .flexibility-second-box{
+            text-align: center;
+            display: none;
+            background: white;
+           
+        }
+        .flexibility-second-box-content h5{
+            color:#4a4a4a;
+            font-family:Gotham-Medium;
+            line-height: 20px;
+        }
+        .flexibility-second-box-content p{
+            font-size:12px;
+            color:#9b9b9b;
+
+        }
+        .flexibility-second-box .sub-heading {
+            margin: 0;
+            margin-bottom: 4%;
+        }
+
+        .small-flexibility-logo{
+            height: 60px;;
+        }
+        .small-flexibility-logo img{
+                height: 22px;
+                width: 40px;
+        }
+        .border-top{
+            border-top:solid 1px #e1e1e1;
+        }
+        .border-right{
+            border-right:solid 1px #e1e1e1;
+        }
+        .border-bottom{
+            border-bottom:solid 1px #e1e1e1;
+        }
+        .toggle-flexibility-box {
+            display: block;
+        }
+
+        .checkbox-container {
+            display: inline;
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+          
+          /* Hide the browser's default checkbox */
+          .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+          }
+          
+          /* Create a custom checkbox */
+          .checkbox-checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+          }
+          
+          /* On mouse-over, add a grey background color */
+          .checkbox-container:hover input ~ .checkbox-checkmark {
+            background-color: #ccc;
+          }
+          
+          /* When the checkbox is checked, add a blue background */
+          .checkbox-container input:checked ~ .checkbox-checkmark {
+            background-color: #54db7b;
+          }
+          
+          /* Create the checkmark/indicator (hidden when not checked) */
+          .checkbox-checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+          }
+          
+          /* Show the checkmark when checked */
+          .checkbox-container input:checked ~ .checkbox-checkmark:after {
+            display: inline;
+          }
+          
+          /* Style the checkmark/indicator */
+          .checkbox-container .checkbox-checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+          }

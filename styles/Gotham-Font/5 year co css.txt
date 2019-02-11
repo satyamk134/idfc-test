@@ -1,0 +1,97 @@
+path  /apps/tajhotels/components/content/5-yearComparision/clientlibs-5yearComparison/css/corp-comparison-standalone-table.css
+
+.table-standalone-wrapper {
+    margin-top: 50px;
+    margin-top: 3.125rem;
+}
+
+.table-container {
+    font-size: 18px;
+    font-size: 1.125rem;a
+    color: #323232;
+    font-family: Calibri;
+}
+
+.table-container .table-header-style {
+    border: 1px solid #d29751;
+    padding: 32px 20px 30px 15px;
+    padding: 2rem 1.25rem 1.875rem 0.9375rem;
+}
+
+.table-container .table-header-style div {
+    border: 0px;
+    border: 0rem;
+    width: 80%;
+}
+
+.table-container .table-header-style span {
+    font-weight: normal;
+}
+
+.table-container .table-body-style {
+    border: 1px solid #d29751;
+    padding: 32px 20px 30px 15px;
+    padding: 2rem 1.25rem 1.875rem 0.9375rem;
+}
+
+.table-container tbody tr:nth-of-type(even) {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.table-container tbody tr:nth-of-type(odd) {
+    background-color: #ffffff;
+}
+
+.table-container .col-specific-head {
+    width: 40%;
+    padding-left: 20px;
+    padding-left: 1.25rem;
+    border: 0px;
+    border: 0rem;
+    font-weight: normal;
+}
+
+.table-container .col-specific-body {
+    padding-left: 20px;
+    padding-left: 1.25rem;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 767px) {
+    .table-standalone-wrapper {
+        display: none;
+    }
+}
+
+.table-standalone-wrapper td {
+    border: 1px solid #d29751;
+    padding: 32px 20px 30px 15px;
+    padding: 2rem 1.25rem 1.875rem 0.9375rem;
+}
+.table-standalone-wrapper {
+    font-size: 18px;
+    font-size: 1.125rem;
+    color: #323232;
+    font-family: Calibri;
+
+}
+            .table-standalone-wrapper table{border:0;}
+
+.table-standalone-wrapper table tr:nth-of-type(even) {
+background-color:#fff;
+ font-family:Calibri-Bold;
+}
+.table-standalone-wrapper table  td:first-child,.table-standalone-wrapper table tr:first-child{
+                     font-family:Calibri-Bold;
+
+
+
+ }
+                            .table-standalone-wrapper table tr:first-child td:first-child {
+                     font-family:Calibri;
+                                        border:0;
+
+
+
+ }
